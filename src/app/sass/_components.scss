@@ -15,12 +15,29 @@
     align-items: center;
     justify-content: center;
 
+    // flex orders a row in numerical order, all items default to 0.
+    // so e.g. if you want to target the 3rd item and put it at the beginning, you'd give it order: -1.
+
+    // 1)
+    // flex-grow works relative to the other items in the row ( you can just use "flex" instead of flex-grow)
+    // so e.g. if I set all the items to flex-grow: 1 and then target a specific item and say flex-grow: 2,
+    // that singular item will grow to twice the size of all the other ones set to 1.
+    // NOTE that you can set flex-grow: 1 (or "flex: 1") to have the element fill its entire space.
+
+    // 2)
+    // flex-shrink by default is set to 1 (meaning the element is allowed to shrink)
+
+    // 3)
+    // flex-basis is the alternative we use for "width".
+
+    // all 3 of these are utilized with (flex: arg1 arg2 arg3) respectively.
     @media only screen and (max-width: $bp-smallest) {
         order: 1;
         flex: 0 0 100%;
         background-color: var(--color-grey-light-2);
     }
 
+    // not that inputs don't inherit the document's font be default.
     &__input {
         font-family: inherit;
         font-size: inherit;
@@ -72,12 +89,15 @@
 
 ////////////////////////////////////////
 // USER NAVIGATION
+
+// align-self is used to position an individual element i.e. you want align-items: center except for one you want flex-end.
 .user-nav {
     align-self: stretch;
     
     display: flex;
     align-items: center;
 
+    // select all immediate children.
     & > * {
         padding: 0 2rem;
         cursor: pointer;
@@ -162,6 +182,7 @@
         width: 3px;
         background-color: var(--color-primary);
         transform: scaleY(0);
+        // there is the cubic-bezier website to get the numbers you need for whatever animation.
         transition: transform .2s,
                     width .4s cubic-bezier(1,0,0,1) .2s,
                     background-color .1s;
